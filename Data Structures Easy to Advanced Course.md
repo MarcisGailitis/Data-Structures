@@ -2,7 +2,8 @@
 
 ## Additional resources
 
-YT link: <https://www.youtube.com/watch?v=RBSGKlAvoiM>
+- William Fiset Github: <https://github.com/williamfiset>
+- YT link: <https://www.youtube.com/watch?v=RBSGKlAvoiM>
 
 ## Table of contents
 
