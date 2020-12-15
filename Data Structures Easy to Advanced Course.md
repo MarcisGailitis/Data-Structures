@@ -60,3 +60,28 @@ YT link: <https://www.youtube.com/watch?v=RBSGKlAvoiM>
 52. Indexed Priority Queue | Data Structure | Source Code
 
 ## 01. Abstract data types
+
+- Q: **What is a Data structure?**
+- A: a data Structure (DS) is a way of organizing data so that it can be used efficiently.
+
+- Q: **Why DS**?
+- A1: They are essential ingredients in creating fast & powerful algorithms.
+- A2: Why help manage and organize data
+- A3: They make code cleaner and easier to understand
+
+### Abstract Data Types vs. Data Structures
+
+An abstract data type (ADT) is an abstraction of a data structure which provides only the interface to which a data structure must adhere to.
+
+The interface does not give any specific details about how something should be implemented or in what programming language.
+
+Abstract data type is like a mode of transportation from a to b.
+specific modes like walking or biking is a data structure.
+
+Abstraction (ADT) | Implementation (DS)
+--- | ---
+Vehicle | Golf car, bicycle, smart car
+List | Dynamic array, Linked List
+Queue | Linked List Based Queue, Array Based Queue, Stack Based Queue
+Map | Tree Map, Hash Map
+
