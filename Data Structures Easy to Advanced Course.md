@@ -112,8 +112,8 @@ Factorial Time | O(n!)
 
 ### Big O Properties
 
--  O(n+c) = O(n), we can remove constant values added to big-O notation.
--  O(n*c) = O(n), we can remove constant values multiplied to big-O notation.
+- O(n+c) = O(n), we can remove constant values added to big-O notation.
+- O(n*c) = O(n), we can remove constant values multiplied to big-O notation.
 - f(n) = 7 \* log(n)\*\*3 + 15 \* n\*\*2 + 2*m\*\*3 + 8 ~> O(f(n)) = O(n\*\*3), as n\*\*3 is the most dominant term in the function.
 
 ### Constant Time | O(1) examples
@@ -191,3 +191,49 @@ O(log2(n)) = O(log(n))
 - Sorting using mergesort O(n*log(n))
 - Iterating over all the cells in a matrix if size m and n O(n*m)
 
+## 03. Dynamic and Static Arrays
+
+The most used data structure, as it forms a fundamental building block for all other data structures.
+
+- Discussion and examples about Arrays:
+  - What is an Array
+  - When and where is Array used?
+  - Complexity
+  - Static array usage example
+- Dynamic Array implementation details
+- Code implementation
+
+### What is an Static Array
+
+A static array is a fixed length container containing n elements indexable from the range [0, n-1].
+
+Indexable means that each slot/index in the array can be referenced with a number.
+
+Static arrays are given as contiguous chunk of memory.
+
+### When and where is Array used?
+
+- storing and accessing sequential data
+- temporary storing objects
+- used by IO routines as buffers
+- lookup tables and inverse lookup tables
+- can be used to return multiple values from a function
+- used in dynamic programming to cache answers ti sub-problems
+-and many others!!!
+
+### Complexity
+
+Operation | Static Array | Dynamic Array
+---| --- | ---
+Access | O(1) | O(1)
+Search | O(n) | O(n)
+Inserting | N/A | O(n)
+Appending | N/A | O(n)
+Deletion | N/A | O(n)
+
+### Static array usage example
+
+A = (44, 12, -5, 17, 6, 0, 3, 9, 100)
+inx = (0,  1,  2,  3, 4, 5, 4, 7, 8)
+
+Elements in A are referenced by their index. There is no other way to access elements in the array.
