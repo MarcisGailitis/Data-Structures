@@ -86,3 +86,108 @@ List | Dynamic array, Linked List
 Queue | Linked List Based Queue, Array Based Queue, Stack Based Queue
 Map | Tree Map, Hash Map
 
+## 02. Introduction to Big-O aka. Computational Complexity Analysis
+
+As programmers, we often find ourselves asking the same two questions, over and over again:
+
+- how much **time** does this algorithm need to finish
+- how much **space** does this algorithm need for its computation
+
+### Big-O Notation
+
+Big-O notation gives an upper bound of the complexity in the **worst** case, helping to quantify performance as the input size becomes arbitrarily large.
+
+n - the size of the input. Complexities ordered from smallest to largest
+
+ Complexity | Big-O
+ ---: | ---
+Constant Time | O(1)
+Logarithmic Time | O(log(n))
+Linear Time | O(n)
+Linearithmic Time | O(n * log(n))
+Quadric time | O(n**2)
+Cubic time | O(n**3)
+Exponential time | O(b**n), b>1
+Factorial Time | O(n!)
+
+### Big O Properties
+
+-  O(n+c) = O(n), we can remove constant values added to big-O notation.
+-  O(n*c) = O(n), we can remove constant values multiplied to big-O notation.
+- f(n) = 7 \* log(n)\*\*3 + 15 \* n\*\*2 + 2*m\*\*3 + 8 ~> O(f(n)) = O(n\*\*3), as n\*\*3 is the most dominant term in the function.
+
+### Constant Time | O(1) examples
+
+```python
+a = 1
+b = 2
+c = a + 5 * b
+
+i = 0
+while i > 11:
+    i=i+11
+```
+
+### Linear Time | O(n) examples
+
+```python
+i=0
+while i<n:
+  i=i+1
+```
+
+f(n) = n
+
+O(f(n)) = O(n)
+
+```python
+i=0
+while i<n:
+  i=i+3
+```
+
+f(n) = n/3
+
+O(f(n)) = O(n)
+
+### Quadric time | O(n**2) examples
+
+```python
+for i in range(0, n)
+    for j in range(0,n)
+ ```
+
+```python
+for i in range(0, n)
+    for j in range(i,n)
+ ```
+
+f(n) = n*n = n**2
+
+O(f(n)) = O(n**2)
+
+### Logarithmic Time | O(log(n)) example with binary search
+
+```python
+low, high = 0, len(n)
+while low < high:
+    mid = (low + high) /2
+
+    if array[mid] == value:
+        return mid
+    elif array[mid] < value:
+        low = mid + 1
+    elif array[mid] > value:
+        high = mid - 1
+return False
+```
+
+O(log2(n)) = O(log(n))
+
+### Other Big-O Examples
+
+- Finding all subsets of a set O(2**n)
+- Finding all permutations of a string O(n!)
+- Sorting using mergesort O(n*log(n))
+- Iterating over all the cells in a matrix if size m and n O(n*m)
+
