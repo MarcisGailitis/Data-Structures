@@ -233,7 +233,50 @@ Deletion | N/A | O(n)
 
 ### 03.4. Static array usage example
 
-A = (44, 12, -5, 17, 6, 0, 3, 9, 100)
-inx = (0,  1,  2,  3, 4, 5, 4, 7, 8)
+A | 44 | 12 | -5 | 17 | 6 | 0 | 3 | 9 | 100
+--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---:
+inx | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
 
 Elements in A are referenced by their index. There is no other way to access elements in the array.
+You can access elements directly A[inx] or iterate through array using for loop. In A[inx] out of bounds, then IndexError.
+
+### 03.5. Dynamic Array implementation details
+
+Dynamic array can grow and shrink in size:
+
+- A.add()
+- A.remove()
+
+- Q **How do we implement a dynamic array**?
+- A Using a static array
+  - 1. Create a static array with an initial capacity
+  - 2. Add elements to the underlying static array, keeping track of the number of elements
+  - 3. If adding another elements will exceed the capacity, then crate a new static array with 2x the capacity and copy the original elements into it.
+
+Suppose we can create a dynamic array with an initial capacity of two and then begin adding elements to it
+
+![](./dynarray.png)
+
+dyn_array | " " | " " 
+--- | --- | ---
+Inx | 0 | 1
+
+dyn_array[7]
+
+dyn_array | 7 | " " 
+--- | --- | ---
+Inx | 0 | 1
+
+dyn_array[-9]
+
+dyn_array | 7 | -9
+--- | --- | ---
+Inx | 0 | 1
+
+dyn_array[3]
+
+dyn_array | 7 | -9 | 3 | " "
+--- | --- | --- | --- | ---
+Inx | 0 | 1 | 2
+
+### 03.6. Code implementation
