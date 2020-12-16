@@ -70,9 +70,9 @@
 - A2: Why help manage and organize data
 - A3: They make code cleaner and easier to understand
 
-### Abstract Data Types vs. Data Structures
+### 01.1. Abstract Data Types vs. Data Structures
 
-An abstract data type (ADT) is an abstraction of a data structure which provides only the interface to which a data structure must adhere to.
+An **abstract data type** (ADT) is an abstraction of a data structure which provides only the interface to which a data structure must adhere to.
 
 The interface does not give any specific details about how something should be implemented or in what programming language.
 
@@ -93,7 +93,7 @@ As programmers, we often find ourselves asking the same two questions, over and 
 - how much **time** does this algorithm need to finish
 - how much **space** does this algorithm need for its computation
 
-### Big-O Notation
+### 02.1. Big-O Notation
 
 Big-O notation gives an upper bound of the complexity in the **worst** case, helping to quantify performance as the input size becomes arbitrarily large.
 
@@ -110,13 +110,13 @@ Cubic time | O(n**3)
 Exponential time | O(b**n), b>1
 Factorial Time | O(n!)
 
-### Big O Properties
+### 02.2. Big O Properties
 
 - O(n+c) = O(n), we can remove constant values added to big-O notation.
 - O(n*c) = O(n), we can remove constant values multiplied to big-O notation.
 - f(n) = 7 \* log(n)\*\*3 + 15 \* n\*\*2 + 2*m\*\*3 + 8 ~> O(f(n)) = O(n\*\*3), as n\*\*3 is the most dominant term in the function.
 
-### Constant Time | O(1) examples
+### 02.3. Constant Time | O(1) examples
 
 ```python
 a = 1
@@ -128,7 +128,7 @@ while i > 11:
     i=i+11
 ```
 
-### Linear Time | O(n) examples
+### 02.4. Linear Time | O(n) examples
 
 ```python
 i=0
@@ -150,7 +150,7 @@ f(n) = n/3
 
 O(f(n)) = O(n)
 
-### Quadric time | O(n**2) examples
+### 02.5. Quadric time | O(n**2) examples
 
 ```python
 for i in range(0, n)
@@ -166,7 +166,7 @@ f(n) = n*n = n**2
 
 O(f(n)) = O(n**2)
 
-### Logarithmic Time | O(log(n)) example with binary search
+### 02.6. Logarithmic Time | O(log(n)) example with binary search
 
 ```python
 low, high = 0, len(n)
@@ -184,7 +184,7 @@ return False
 
 O(log2(n)) = O(log(n))
 
-### Other Big-O Examples
+### 02.7. Other Big-O Examples
 
 - Finding all subsets of a set O(2**n)
 - Finding all permutations of a string O(n!)
@@ -203,7 +203,7 @@ The most used data structure, as it forms a fundamental building block for all o
 - Dynamic Array implementation details
 - Code implementation
 
-### What is an Static Array
+### 03.1. What is an Static Array
 
 A static array is a fixed length container containing n elements indexable from the range [0, n-1].
 
@@ -211,7 +211,7 @@ Indexable means that each slot/index in the array can be referenced with a numbe
 
 Static arrays are given as contiguous chunk of memory.
 
-### When and where is Array used?
+### 03.2. When and where is Array used?
 
 - storing and accessing sequential data
 - temporary storing objects
@@ -221,7 +221,7 @@ Static arrays are given as contiguous chunk of memory.
 - used in dynamic programming to cache answers ti sub-problems
 -and many others!!!
 
-### Complexity
+### 03.3. Complexity
 
 Operation | Static Array | Dynamic Array
 ---| --- | ---
@@ -231,7 +231,7 @@ Inserting | N/A | O(n)
 Appending | N/A | O(n)
 Deletion | N/A | O(n)
 
-### Static array usage example
+### 03.4. Static array usage example
 
 A = (44, 12, -5, 17, 6, 0, 3, 9, 100)
 inx = (0,  1,  2,  3, 4, 5, 4, 7, 8)
