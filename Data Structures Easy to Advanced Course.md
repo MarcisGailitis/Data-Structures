@@ -353,31 +353,57 @@ Doubly Linked | Can be traversed backwards | Takes 2x memory
 ### 05.5 How to insert new element
 
 1. Inserting Singly Linked List
-1.1. Singly Linked List: 5 -> 23 -> 7 -> 23
-1.2. Insert 11 where the 3rd node is (7)
-1.3. Create a new traverser, which points to the head
-1.4. Seek up to but not included 3rd node (23)
-1.5. Create the new node (11)
-1.6. Add 11 pointer to the next node (7)
-1.7 Change traverser's pointer of (23) from original node to the new node (7 -> 11)
-1.8. Singly Linked List: 5 -> 23 -> 11 -> 7 -> 23
+  1.1. Singly Linked List: 5 -> 23 -> 7 -> 23
+  1.2. Insert 11 where the 3rd node is (7)
+  1.3. Create a new traverser pointer at Head node(5)
+  1.4. Seek up to but not including 3rd node (23)
+  1.5. Create the new node (11)
+  1.6. Add node's (11) pointer to the next node (7)
+  1.7 Change traverser's pointer (23) from original node to the new node (7 -> 11)
+  1.8. Singly Linked List: 5 -> 23 -> 11 -> 7 -> 23
 
 2. Inserting Doubly Linked List
-2.1. Singly Linked List: 5 <-> 23 <-> 7 <-> 23
-2.2. Insert 11 where the 3rd node is (7)
-2.3. Create a new traverser, which points to the head
-2.4. Seek up to but not included 3rd node (23)
-2.5. Create the new node (11)
-2.6. Add new node pointer to the next node (7)
-2.7. Add new node pointer to the previous node (23)
-2.8. Change next node (7) pointer to the new node (23 -> 11)
-2.9. Change previous node (23) pointer to the new node (7 -> 11)
-2.8. Singly Linked List: 5 <-> 23 <-> 11 <-> 7 <-> 23
+  2.1. Singly Linked List: 5 <-> 23 <-> 7 <-> 23
+  2.2. Insert 11 where the 3rd node is (7)
+  2.3. Create a new traverser pointer at Head node(5)
+  2.4. Seek up to but not including 3rd node (23)
+  2.5. Create the new node (11)
+  2.6. Add new node pointer to the next node (7)
+  2.7. Add new node pointer to the previous node (23)
+  2.8. Change next node (7) pointer to the new node (23 -> 11)
+  2.9. Change previous node (23) pointer to the new node (7 -> 11)
+  2.8. Singly Linked List: 5 <-> 23 <-> 11 <-> 7 <-> 23
 
 ### 05.6 How to remove element
 
 1. Removing from Singly Linked List
-1.1. Singly Linked List: 7 -> 0 -> 4 -> 9 -> 15
-1.2. Insert 11 where the 3rd node is (7)
+  1.1. Singly Linked List: 7 -> 0 -> 4 -> 9 -> 15
+  1.2. Remove the 4th node (9)
+  1.3. Create two traverser pointers: traverser1 = head (7), traverser2 = head+1 (0)
+  1.4. Seek the node, that should be deleted, traverser1 (4), traverser2 (9)
+  1.5. Create additional pointer for traverser2 = temp (so that we can deallocate it later)
+  1.6. Advance traverser2 to next node(15)
+  1.7. set traverser1 pointer to traverser2
+  1.8. Delete the temp node (9)
+
+2. Removing from Doubly Linked List
+  2.1. Doubly Linked List: 7 <-> 0 <-> 4 <-> 9 <-> 15
+  2.2. Remove the 4th node (9)
+  2.3. Create a traversal pointer at head node (0)
+  2.4. Seek the node to delete (9)
+  2.5. Change previous node's (4) pointer to next node (15)
+  2.5. Change next node's (15) pointer to previous node (4)
+  2.6. Delete the traversal node (9)
 
 ### 05.7 Complexity analysis
+
+Operation | Singly Linked | Doubly linked
+---| --- | ---
+Search | O(n) | O(n)
+Insert at head | O(1) | O(1)
+Insert at tail | O(1) | O(1)
+Remove at head | O(1) | O(1)
+Remove at tail | O(n)* | O(1)
+Remove in middle | O(n) | O(n)
+
+\* Even if we do have a reference to the tail in a singly linked list, we can remove it, but only once, as we cannot reset the value of what the tail is. So we would have to seek to the end of the list to find what the new tail node is.
