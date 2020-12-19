@@ -3,6 +3,7 @@
 ## Additional resources
 
 - William Fiset Github: <https://github.com/williamfiset>
+- GitHub with .py code for some of the Data Structures: <https://github.com/akzare/Algorithms>
 - YT link: <https://www.youtube.com/watch?v=RBSGKlAvoiM>
 
 ## Table of contents
@@ -255,15 +256,15 @@ Dynamic array can grow and shrink in size:
 
 Suppose we can create a dynamic array with an initial capacity of two and then begin adding elements to it
 
-![](./dynarray.png)
+![ ](./dynarray.png)
 
-dyn_array | " " | " " 
+dyn_array | " " | " "
 --- | --- | ---
 Inx | 0 | 1
 
 dyn_array[7]
 
-dyn_array | 7 | " " 
+dyn_array | 7 | " "
 --- | --- | ---
 Inx | 0 | 1
 
@@ -279,4 +280,104 @@ dyn_array | 7 | -9 | 3 | " "
 --- | --- | --- | --- | ---
 Inx | 0 | 1 | 2
 
-### 03.6. Code implementation
+## 04. Dynamic Array Code
+
+Create a dynamic array class:
+
+```python
+class Array(Iterable):
+```
+
+- Attibutes:
+  - arr - internal static array
+  - len - length user thinks array is
+  - capacity - actual length of array
+
+- Methods:
+  - DynamicArray() - initiates dynamic array of pre-defined size
+  - DynamicArray(n) - initiates dynamic array of size n
+  - size() - returns arrays len attribute
+  - isEmpty() - return true if array is empty
+  - get(inx) - returns element at index inx
+  - set(inx, element) - updates element at index inx
+  - clear() - cleans array, sets len to 0
+  - add() - adds element at the end of array, resizes up if needed
+  - removeAt(inx) - removes specific index from the list
+  - remove(obj) - removes element of list, returns True
+  - indexOf(obj) returns index for specific element
+  - contains() - checks is array contains specific value
+
+## 05. Linked Lists Introduction
+
+- What is a linked list?
+- Where are linked lists used?
+- Terminology
+- Singly linked vs. doubly linked
+- How to insert new element
+- How to remove element
+- Complexity analysis
+
+### 05.1 What is a linked list?
+
+A linked list is a sequential list of nodes, that 1\) hold data 2\) which point other nodes also containing data.
+
+data -> Data -> Data -> Data -> Null
+
+Last node points to Null, meaning that there are no mode nodes at this point.
+
+### 05.2 Where are linked lists used?
+
+- Used in many List, Queue \& Stack implementations
+- great for creating circular lists, when the last node's pointer points back to 1st node
+- can easily model real world objects, such as trains
+- used in separate chaining which is present certain Hash-table implementations to deal with hashing collusions
+- Often used in the implementation of adjacency lists for graphs
+
+### 05.3 Terminology
+
+- Head: the first node in a linked list
+- Tail: the las node in a linked list
+- Node: an object containing data and pointer(s)
+- Pointer: a reference to another node
+
+### 05.4 Singly linked vs. doubly linked
+
+- Singly linked list only hold a reference to the next node. In the implementation you always maintain a reference to the head and tail node for quick addition/removals
+- In Doubly linked list each node holds a reference to the next and previous node. In the implementation you always maintain a reference to the head adn the tail the doubly linked list to do quick additions, removals from both ends of your list.
+
+Type | Pros | Cons
+--- | --- | ---
+Singly Linked | Uses less memory, simpler implementation | Cannot easily access previous elements
+Doubly Linked | Can be traversed backwards | Takes 2x memory
+
+### 05.5 How to insert new element
+
+1. Inserting Singly Linked List
+1.1. Singly Linked List: 5 -> 23 -> 7 -> 23
+1.2. Insert 11 where the 3rd node is (7)
+1.3. Create a new traverser, which points to the head
+1.4. Seek up to but not included 3rd node (23)
+1.5. Create the new node (11)
+1.6. Add 11 pointer to the next node (7)
+1.7 Change traverser's pointer of (23) from original node to the new node (7 -> 11)
+1.8. Singly Linked List: 5 -> 23 -> 11 -> 7 -> 23
+
+2. Inserting Doubly Linked List
+2.1. Singly Linked List: 5 <-> 23 <-> 7 <-> 23
+2.2. Insert 11 where the 3rd node is (7)
+2.3. Create a new traverser, which points to the head
+2.4. Seek up to but not included 3rd node (23)
+2.5. Create the new node (11)
+2.6. Add new node pointer to the next node (7)
+2.7. Add new node pointer to the previous node (23)
+2.8. Change next node (7) pointer to the new node (23 -> 11)
+2.9. Change previous node (23) pointer to the new node (7 -> 11)
+2.8. Singly Linked List: 5 <-> 23 <-> 11 <-> 7 <-> 23
+
+### 05.6 How to remove element
+
+1. Removing from Singly Linked List
+1.1. Singly Linked List: 7 -> 0 -> 4 -> 9 -> 15
+1.2. Insert 11 where the 3rd node is (7)
+
+### 05.7 Complexity analysis
