@@ -501,3 +501,8 @@ public class DoublyLinkedList <T> implements Iterable <T> {}:
   - indexOf(obj) - find the index of a particular value in the linked list 0(n)
   - contains(obj) - check if value is contained within the linked list
 
+## 07. Stack Introduction
+
+## 08. Stack Implementation
+
+## 09. Stack Code
