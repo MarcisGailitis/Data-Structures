@@ -407,3 +407,75 @@ Remove at tail | O(n)* | O(1)
 Remove in middle | O(n) | O(n)
 
 \* Even if we do have a reference to the tail in a singly linked list, we can remove it, but only once, as we cannot reset the value of what the tail is. So we would have to seek to the end of the list to find what the new tail node is.
+
+## 06. Doubly Linked List Code
+
+Create a Doubly Linked List class:
+
+```java
+public class DoublyLinkedList <T> implements Iterable <T> {}:
+```
+
+- Attibutes:
+  - size - 0 size of the linked list
+  - head = Null, current Head element
+  - tail = Null, current Tail element
+
+```java
+  private int size = 0;
+  private Node <T> head = null;
+  private Node <T> tail = null;
+```
+
+- Methods:
+  - Internal node class to repre## 06. Doubly Linked List Code
+
+Create a Doubly Linked List class:
+
+```java
+public class DoublyLinkedList <T> implements Iterable <T> {}:
+```
+
+- Attibutes:
+  - size - 0 size of the linked list
+  - head = Null, current Head element
+  - tail = Null, current Tail element
+
+```java
+  private int size = 0;
+  private Node <T> head = null;
+  private Node <T> tail = null;
+```sent data
+
+```java
+  private class Node <T> {
+    // the actual data stored in the node
+    T data; 
+    // pointers to previous/next node
+    Node <T> prev, next;
+
+    public Node(T data, Node <T> prev, Node <T> next) {
+      this.data = data;
+      this.prev = prev;
+      this.next = next;
+    }
+  }
+```
+
+- Methods:
+  - clear() clears the list in linear time, iterates trough lists, cleans data as well as previous/next pointer and changes list's size to 0
+  - size() returns list's size
+  - isEmpty() returns True, if empty
+  - add(elem) {addLast(elem)} add an element to the Tail of the linked list, O(1)
+  - addFirst(elem) add an element to the Head of the linked list, O(1)
+  - addLast(elem) add a node to the end of the linked list, O(1)
+  - peekFirst() - returns the first element of the list, O(1)
+  - PeekLast() - returns the last element of the list, O(1)
+  - removeFirst() - removes 1st element at the head of the linked list, O(1)
+  - removeLast() - removes last element from the linked list
+  - private remove(node) - remove an arbitrary node from the linked list, private, as node class itself is private, used in removeAt and remove methods
+  - removeAt(index) - remove an arbitrary node from the linked list O(n)
+  - remove(obj) - remove a particular value in the linked list
+  - indexOf(obj) - find the index of a particular value in the linked list 0(n)
+  - contains(obj) - check if value is contained within the linked list
+
