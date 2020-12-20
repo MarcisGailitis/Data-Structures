@@ -284,8 +284,8 @@ Inx | 0 | 1 | 2
 
 Create a dynamic array class:
 
-```python
-class Array(Iterable):
+```java
+public class Array <T> implements Iterable <T> {
 ```
 
 - Attibutes:
@@ -293,9 +293,31 @@ class Array(Iterable):
   - len - length user thinks array is
   - capacity - actual length of array
 
+```java
+  private T [] arr;
+  private int len = 0;
+  private int capacity = 0;
+```
+
 - Methods:
-  - DynamicArray() - initiates dynamic array of pre-defined size
-  - DynamicArray(n) - initiates dynamic array of size n
+  - Array() - initiates dynamic array of pre-defined size
+
+```java
+  public Array() {this(16); }
+```
+
+- Methods:
+  - Array(n) - initiates dynamic array of size n
+
+```java
+  public Array(int capacity) {
+    if (capacity < 0) throw new IllegalArgumentException("Illegal Capacity: " + capacity);
+    this.capacity = capacity;
+    arr = (T[]) new Object[capacity];
+  }
+```
+
+- Methods:
   - size() - returns arrays len attribute
   - isEmpty() - return true if array is empty
   - get(inx) - returns element at index inx
