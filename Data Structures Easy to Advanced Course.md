@@ -343,7 +343,8 @@ public class Array <T> implements Iterable <T> {
 
 A linked list is a sequential list of nodes, that 1\) hold data 2\) which point other nodes also containing data.
 
-data -> Data -> Data -> Data -> Null
+![Singly Linked list](./linked_list.png)
+
 
 Last node points to Null, meaning that there are no mode nodes at this point.
 
@@ -361,6 +362,8 @@ Last node points to Null, meaning that there are no mode nodes at this point.
 - Tail: the las node in a linked list
 - Node: an object containing data and pointer(s)
 - Pointer: a reference to another node
+
+![Singly Linked list Terminology](./linked_list_term.png)
 
 ### 05.4 Singly linked vs. doubly linked
 
@@ -507,8 +510,8 @@ public class DoublyLinkedList <T> implements Iterable <T> {}:
 
 A stack is one ended linear data structure which models a real world stack by shaving two primary operations, namely push(variable) and pop(). Used for LIFO operations.
 
-<!-- TODO  -->
-Insert stack image
+![stack](./stack.png)
+Head instead of Top
 
 ### 07.2 When and where is stack used?
 
@@ -598,3 +601,4 @@ Move the Head pointer to the next node and deallocate last node
 - Null (Head)
 
 ## 09. Stack Code
+
