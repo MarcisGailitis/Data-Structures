@@ -503,6 +503,98 @@ public class DoublyLinkedList <T> implements Iterable <T> {}:
 
 ## 07. Stack Introduction
 
+### 07.1 What is a stack?
+
+A stack is one ended linear data structure which models a real world stack by shaving two primary operations, namely push(variable) and pop(). Used for LIFO operations.
+
+<!-- TODO  -->
+Insert stack image
+
+### 07.2 When and where is stack used?
+
+- Used by undo mechanisms in text editors
+- Used in compiler syntax checking for matching brackets and braces
+- Can be used to model a pile of books or plates.
+- Used behind the scenes to support recursion by keeping track of previous function calls
+- Can be used to do a Depth First Search (DFS) on the graph.
+
+### 07.3 Complexity analysis
+
+Complexity analysis, assumes that you implemented stack using Linked List
+
+Operation | Stack
+--- | ---
+Pushing | O(1)
+Popping | O(1)
+Peeking | O(1)
+Searching | O(n)
+Size | O(1)
+
+### 07.4 Stack usage examples
+
+Example: Brackets
+Given a string made up of the following brackets: (){}[], determine if the brackets properly match.
+
+[{}]     -> Valid
+(()()) -> Valid
+{(.      -> Invalid
+
+bracket_str = '[{}]'
+s=stack()
+
+```python
+for bracket in bracket_str:
+    rev = getReversedBracket()
+    if isLeftBracket(bracket):
+      s.push(bracket)
+    elif s.isEmpty() or s.pop() != rev:
+      return False
+  return s.isEmpty()
+```
+
+Tower of Hanoi:
+
+Disk Pile 1 | Disk Pile 2 | Disk Pile 3
+--- | --- | ---
+1 | |
+2 | |
+3 | |
+4 | |
+
 ## 08. Stack Implementation
+
+### 08.1 Pushing elements on stack
+
+You can implement Stack as Array, Singly linked list or even Doubly linked list.
+
+Insert the new element before the Head in singly linked list.
+
+- Null (Head)
+- push(4)
+- Null -> 4 (Head)
+- push(2)
+- Null -> 4 -> 2 (Head)
+- push(5)
+- Null -> 4 -> 2 -> 5 (Head)
+- push(13)
+- Null -> 4 -> 2 -> 5 -> 13 (Head)
+
+### 08.2 Removing elements from stack
+
+Move the Head pointer to the next node and deallocate last node
+
+- Null -> 4 -> 2 -> 5 -> 13 (Head)
+- pop()
+- Null -> 4 -> 2 -> 5 (Head) -> 13
+- Null -> 4 -> 2 -> 5 (Head)
+- pop()
+- Null -> 4 -> 2 (Head) -> 5
+- Null -> 4 -> 2 (Head)
+- pop()
+- Null -> 4 (Head) -> 2
+- Null -> 4 (Head)
+- pop()
+- Null (Head) -> 4
+- Null (Head)
 
 ## 09. Stack Code
