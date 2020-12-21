@@ -602,3 +602,30 @@ Move the Head pointer to the next node and deallocate last node
 
 ## 09. Stack Code
 
+Initialise Stack class using Doubly link list, provided by JAva
+
+```java
+public class Stack <T> implements Iterable <T> {
+  private java.util.LinkedList <T> list = new java.util.LinkedList <T>();
+```
+
+Methods:
+
+- stack() creates an empty stack
+- stack(firstElem) - creates a Stack with initial element
+
+```java
+  public Stack () { }
+
+  publicStack(T firstElem) {
+    push(firstElem);
+  }
+```
+
+Methods:
+
+- size() - returns Stack size
+- isEmpty() - returns True, is empty
+- push(elem) - push an element to the stack
+- pop() - removes en element from the list, and returns it
+- peek() - peeks at the last (Head) element, w/o removing it
