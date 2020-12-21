@@ -629,3 +629,23 @@ Methods:
 - push(elem) - push an element to the stack
 - pop() - removes en element from the list, and returns it
 - peek() - peeks at the last (Head) element, w/o removing it
+
+## 10. Queue Introduction
+
+### 10.1 What is a queue
+
+### 10.2 Terminology
+
+### 10.3 When and where is queue used
+
+### 10.4 Complexity Analysis
+
+### 10.1 Queue Breadth First Search (BFS) example
+
+## 11. Queue Implementation
+
+### 11.1 How to enqueue (add) elements to a queue
+
+### 11.2 Hot to dequeue (remove) elements from a queue
+
+## 12. Queue Code
