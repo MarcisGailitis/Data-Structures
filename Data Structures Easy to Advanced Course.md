@@ -2,9 +2,19 @@
 
 ## Additional resources
 
-- William Fiset Github: <https://github.com/williamfiset>
+- William Fiset's Github: <https://github.com/williamfiset>
 - GitHub with .py code for some of the Data Structures: <https://github.com/akzare/Algorithms>
 - YT link: <https://www.youtube.com/watch?v=RBSGKlAvoiM>
+
+1. Dynamic & Static Array
+2. Linked & Doubly Linked List
+3. Stack
+4. Queue
+5. Priority Queue
+Union find
+Binary Search
+Hash Table
+Fenwick Tree
 
 ## Table of contents
 
@@ -345,7 +355,6 @@ A linked list is a sequential list of nodes, that 1\) hold data 2\) which point 
 
 ![Singly Linked list](./linked_list.png)
 
-
 Last node points to Null, meaning that there are no mode nodes at this point.
 
 ### 05.2 Where are linked lists used?
@@ -452,8 +461,9 @@ public class DoublyLinkedList <T> implements Iterable <T> {}:
   private Node <T> tail = null;
 ```
 
+<!-- TODO: update method and code -->
 - Methods:
-  - Internal node class to repre## 06. Doubly Linked List Code
+  - Internal node class to repre
 
 Create a Doubly Linked List class:
 
@@ -634,18 +644,125 @@ Methods:
 
 ### 10.1 What is a queue
 
+A queue is a linear data structure which models real world queues by having two primary operations, enqueued and dequeue.
+
 ### 10.2 Terminology
+
+- Dequeue = removing = Polling
+- Enqueue = adding = offering
+- Queue front
+- Queue back
+
+![Queue](./queue.jpg)
+
+- enqueue(nr)
+- dequeue()
 
 ### 10.3 When and where is queue used
 
+- Any waiting line models a queue, for example, a lineup of a movie theatre
+- can be used to efficiently keep track of the x most recently added elements
+- webserver request mgmt, where you want first come first serve - FIFO
+- Breadth-first search (BFS) graph traversal
+
 ### 10.4 Complexity Analysis
 
+Operation | Queue
+---| --- | ---
+Enqueue | O(1)
+Dequeue | O(1)
+Peeking | O(1)
+Contains | O(n)
+Removal | O(n)
+Is Empty | O(1)
+
 ### 10.1 Queue Breadth First Search (BFS) example
+
+BFS objective is to start on a node and traverse the entire graph, first by visiting all the neighbours of the starting node, and then visiting all the neighbours of the visited nodes.
+
+![Queue](./queue-BFS.jpg)
+
+1. On the frontier: 0
+2. On the frontier: 1, 9; visited: 0
+3. On the frontier: 8; visited: 0, 1 ,9
+4. On the frontier: 7; visited: 0, 1 ,9,8
+5. etc
+
+```py
+q = queue()
+q.enqueue(staring_node)
+starting_node.visited = True
+
+while q.length != 0:
+  node = q.dequeue()
+
+  for neighbour in neighbours(node):
+      if neighbour.visited == False:
+          neighbour.visited = True
+          q.enqueue(neighbour)
+```
 
 ## 11. Queue Implementation
 
 ### 11.1 How to enqueue (add) elements to a queue
 
+1. Null (Head)(Tail)
+1. enqueue(5)
+1. 5 (Tail)(Head) -> Null
+1. enqueue(1)
+1. 5 (Head) -> 1 (Tail) -> Null
+1. enqueue(6)
+1. 5 (Head) -> 1 -> 6 (Tail) -> Null
+1. enqueue(17)
+1. 5 (Head) -> 1 -> 6 -> 17 (Tail) -> Null
+1. enqueue(8)
+1. 5 (Head) -> 1 -> 6 -> 17 -> 8 (Tail) -> Null
+
 ### 11.2 Hot to dequeue (remove) elements from a queue
 
+1. 5 (Head) -> 1 -> 6 -> 17 -> 8 (Tail) -> Null
+1. dequeue()
+1. Null 1 (Head) -> 6 -> 17 -> 8 (Tail) -> Null
+1. dequeue()
+1. Null 6 (Head) -> 17 -> 8 (Tail) -> Null
+1. dequeue()
+1. Null 17 (Head) -> 8 (Tail) -> Null
+1. dequeue()
+1. Null 8 (Tail)(Head) -> Null
+1. dequeue()
+1. Null (Tail)(Head)
+
 ## 12. Queue Code
+
+Create a queue class using double linked list
+
+```java
+public class Queue <T> implements Iterable <T> {
+  private java.util.LinkedList <T> list = new java.util.LinkedList <T>();
+```
+
+Methods:
+
+- queue() - creates an empty queue
+- queue(first_elem) - creates a queue with single element
+
+```java
+  public Queue() { }
+  public queue(T firstElem) {
+    enqueue(firstElem);
+  }
+```
+
+Methods:
+
+- size() - returns size of the queue
+- isEmpty() - return True, if queue is empty
+- peek() - returns first element of the list
+- dequeue() - returns and removes first element of the list
+- enqueue() - adds element to the queue
+
+```java
+  public void enqueue(T elem) {
+    list.add.Last(elem);
+   }
+```
