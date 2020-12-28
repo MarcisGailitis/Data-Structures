@@ -516,6 +516,8 @@ public class DoublyLinkedList <T> implements Iterable <T> {}:
 
 ## 07. Stack Introduction
 
+LV: viengala rinda
+
 ### 07.1 What is a stack?
 
 A stack is one ended linear data structure which models a real world stack by shaving two primary operations, namely push(variable) and pop(). Used for LIFO operations.
@@ -766,3 +768,99 @@ Methods:
     list.add.Last(elem);
    }
 ```
+
+## 13. Priority Queue Introduction
+
+### 13.1  What is a PQ?
+
+A Priority Queue (PQ) is an Abstract Data Type (ADT), that operates similar to a normal queue, except that each element has a certain priority. The priority of the elements in the priority queue determine the order in which elements are removed from the PQ.
+Priority queues only supports comparable data, meaning the data inserted into the priority queue myst be able to be ordered in same way either from least to greatest ot greatest to least. This is so that we are able to assign relative priorities to each other.
+
+### 13.2 PQ Example
+
+Suppose all these values aer inserted into a PQ with an ordering imposed on the number to be from least to greatest.
+
+- initial
+  - random_nrs = [14, 4, 8, 1, 3, 22]
+  - output=[]
+- poll()
+  - random_nrs = [14, 4, 8, 3, 22]
+  - output=[1]
+- add(2)
+  - random_nrs = [14, 4, 8, 3, 22, 2]
+  - output=[1]
+- poll()
+  - random_nrs = [14, 4, 8, 3, 22]
+  - output=[1, 2]
+- add(4)
+  - random_nrs = [14, 4, 8, 3, 22, 4]
+  - output=[1, 2]
+- poll()
+  - random_nrs = [14, 4, 8, 22, 4]
+  - output=[1, 2, 3]
+- add(5)
+  - random_nrs = [14, 4, 8, 22, 4, 5]
+  - output=[1, 2, 3]
+- add(9)
+  - random_nrs = [14, 4, 8, 22, 4, 5, 9]
+  - output=[1, 2, 3]
+- poll rest
+  - random_nrs = []
+  - output=[1, 2, 3, 4, 4, 5, 8, 9, 14, 22]
+
+### 13.3  What is a Heap? (grēda)
+
+LV: kaudze, grēda
+
+A heap is a tree based data structure that satisfies the heap invariant (also called heap property): if A is a a parent node of B then A is ordered with respect to B for all nodes A, B in the heap. What this means is the value of parent node is always greater (or smaller) or equal for all child nodes for Max Heap (for Min Heap).
+
+![heap](./heap.png)
+
+### 13.4  When and where is a PQ used?
+
+<!-- TODO: what is this -->
+- Used in certain implementations of Dijkstra's Shortest Path algorithm
+- Anytime you need to dynamically fetch the 'next best' or 'next worst' element
+<!-- TODO: what is this -->
+- Used in Huffman coding (often used in lossless data compression)
+<!-- TODO: what is this -->
+- Best First Search (BFS) algorithms such as A* use PQs to continuously grab the next most promising node
+<!-- TODO: what is this -->
+- Used by Minimum Spanning tree algorithm
+
+### 13.5  Complexity analysis
+
+Operation | PQ with binary heap
+---| --- | ---
+Binary Heap construction | O(n)
+Polling (removing) | O(log(n))
+Peeking | O(1)
+Adding | O(log(n))
+Naive removing | O(n)
+Advance Removing with help from a hash table \* | O(log(n))
+Naive contains | O(n)
+Contains check with help of a hash table \* | O(1)
+
+\* using hash table to help optimize these operations does take up linear space and also adds some overhead to the binary heap implementation.
+
+### 13.6  How to turn Min PQ to Max PQ
+
+**Problem**: often the standard library of most programming languages only provide a Min PQ, which sorts by smallest elements first, but some times we need a Max PQ.
+
+Since elements in a priority queue are comparable they implement some sort of comparable interface which we can simply negate to achieve a Max heap.
+
+### 13.7  Heap sinking and swimming (also called sift down and sift up or bubble up & bubble down)
+
+### 13.8  Adding elements to PQ
+
+### 13.9  Removing elements from PQ
+
+### 13.10  Code implementation
+
+## 14. Priority Queue Min Heaps and Max Heaps
+
+## 15. Priority Queue Inserting Elements
+
+## 16. Priority Queue Removing Elements
+
+## 17. Priority Queue Code
