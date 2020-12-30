@@ -773,7 +773,8 @@ Methods:
 
 ### 13.1  What is a PQ?
 
-A Priority Queue (PQ) is an Abstract Data Type (ADT), that operates similar to a normal queue, except that each element has a certain priority. The priority of the elements in the priority queue determine the order in which elements are removed from the PQ.
+A Priority Queue (PQ) is an Abstract Data Type (ADT) that operates similar to a normal queue, except that each element has a certain priority. The priority of the elements in the priority queue determine the order in which elements are removed from the PQ.
+
 Priority queues only supports comparable data, meaning the data inserted into the priority queue myst be able to be ordered in same way either from least to greatest ot greatest to least. This is so that we are able to assign relative priorities to each other.
 
 ### 13.2 PQ Example
@@ -804,7 +805,7 @@ Suppose all these values aer inserted into a PQ with an ordering imposed on the 
 - add(9)
   - random_nrs = [14, 4, 8, 22, 4, 5, 9]
   - output=[1, 2, 3]
-- poll rest
+- poll_rest()
   - random_nrs = []
   - output=[1, 2, 3, 4, 4, 5, 8, 9, 14, 22]
 
@@ -816,24 +817,61 @@ A heap is a tree based data structure that satisfies the heap invariant (also ca
 
 ![heap](./heap.png)
 
+### 13.3.1 A Priority queue
+
+Priority queues are usually implemented with heaps since this gives them the best possible time complexity.
+
+The Priority Queue (PQ) is an Abstract Data Type (ADT), hence heaps are not the only way to implement PQs. As an example, we could use an unsorted list, but his would give us the best possible time complexity.
+
+### 13.3.2 Binary Heap
+
+There are many types of heaps we could use to implement a priority queue, including:
+
+- Binary heap
+- Fibonacci Heap
+- Binomial Heap
+- Pairing Heap
+- etc
+
+A binary heap is a binary tree that supports the heap invariant. In a binary tree every node has exactly two children
+
+![Binary Heap](2020-12-30-15-52-31.png)
+
+A Complete binary tree is a tree in which at every level, except possibly the last is completely filled and all the nodes are as far left as possible. As you will see when we insert nodes we always insert them in bottom left position as possible.
+
+![Complete Binary Heap](2020-12-30-15-54-39.png)
+
+![Next insertion point for Complete Binary Heap](2020-12-30-16-41-34.png)
+
+### 13.3.3 Representation
+
+We can represent a binary Tree using array.
+
+![Representation of Binary Tree](2020-12-30-16-43-11.png)
+
+Let *i* be the parent node index (zero based):
+
+- left child index: 2i+1
+- Right child index: 2i+2
+
 ### 13.4  When and where is a PQ used?
 
-<!-- TODO: what is this -->
+<!-- TODO: what is Dijkstra's Shortest Path algorithm -->
 - Used in certain implementations of Dijkstra's Shortest Path algorithm
 - Anytime you need to dynamically fetch the 'next best' or 'next worst' element
-<!-- TODO: what is this -->
+<!-- TODO: what is Huffman coding -->
 - Used in Huffman coding (often used in lossless data compression)
-<!-- TODO: what is this -->
+<!-- TODO: what is Best First Search algo -->
 - Best First Search (BFS) algorithms such as A* use PQs to continuously grab the next most promising node
-<!-- TODO: what is this -->
-- Used by Minimum Spanning tree algorithm
+<!-- TODO: what is Minimum Spanning Tree algo -->
+- Used by Minimum Spanning Tree algorithm
 
 ### 13.5  Complexity analysis
 
 Operation | PQ with binary heap
 ---| --- | ---
 Binary Heap construction | O(n)
-Polling (removing) | O(log(n))
+Polling (removing at the root) | O(log(n))
 Peeking | O(1)
 Adding | O(log(n))
 Naive removing | O(n)
@@ -841,25 +879,47 @@ Advance Removing with help from a hash table \* | O(log(n))
 Naive contains | O(n)
 Contains check with help of a hash table \* | O(1)
 
-\* using hash table to help optimize these operations does take up linear space and also adds some overhead to the binary heap implementation.
-
-### 13.6  How to turn Min PQ to Max PQ
-
-**Problem**: often the standard library of most programming languages only provide a Min PQ, which sorts by smallest elements first, but some times we need a Max PQ.
-
-Since elements in a priority queue are comparable they implement some sort of comparable interface which we can simply negate to achieve a Max heap.
-
-### 13.7  Heap sinking and swimming (also called sift down and sift up or bubble up & bubble down)
-
-### 13.8  Adding elements to PQ
-
-### 13.9  Removing elements from PQ
-
-### 13.10  Code implementation
+\* using a hash table to help optimize these operations does take up linear space and also adds some overhead to the binary heap implementation.
 
 ## 14. Priority Queue Min Heaps and Max Heaps
 
+**Problem**: often the standard library of most programming languages only provide a Min PQ, which sorts by smallest elements first, but some times we need a Max PQ.
+
+Since elements in a priority queue are comparable they implement some sort of comparable interface which we can simply negate or invert to achieve a Max heap.
+
+### 14.1 Turning Min PQ into Max PQ, method1
+
+Let x, y be numbers in the PQ. For a min PQ, if x <=y then x comes out of the PQ before y, so the negation of this is if x >= y then y comes before x.
+
+random_in = [2, 7, 5, 3, 11, 13]
+
+negated min_pq = [13, 11, 7, 5, 3, 2]
+
+### 14.2 Turning Min PQ into Max PQ, method2
+
+An  alternative method for numbers is for negate the numbers as you insert them into the PQ and negate them again, when they are taken out. This has the same effect as negating the operator.
+
+random_in = [2, 7, 5, 3, 11, 13]
+random_negated_in = [-2, -7, -5, -3, -11, -13]
+negated min_pq = [13, 11, 7, 5, 3, 2]
+
 ## 15. Priority Queue Inserting Elements
+
+insert(1)
+
+Add 1 at the bottom left position:
+![Add 1 at the bottom left](2020-12-30-16-55-31.png)
+
+Bubble up 1:
+![Bubble up 1](2020-12-30-16-57-01.png)
+
+Bubble up 2:
+![Bubble up 2](2020-12-30-16-57-54.png)
+
+Bubble up 3:
+![Bubble up 3](2020-12-30-16-58-17.png)
+
+01:57:57
 
 ## 16. Priority Queue Removing Elements
 
