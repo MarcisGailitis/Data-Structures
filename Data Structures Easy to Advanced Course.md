@@ -835,19 +835,19 @@ There are many types of heaps we could use to implement a priority queue, includ
 
 A binary heap is a binary tree that supports the heap invariant. In a binary tree every node has exactly two children
 
-![Binary Heap](2020-12-30-15-52-31.png)
+![Binary Heap](heap_binary.png)
 
 A Complete binary tree is a tree in which at every level, except possibly the last is completely filled and all the nodes are as far left as possible. As you will see when we insert nodes we always insert them in bottom left position as possible.
 
-![Complete Binary Heap](2020-12-30-15-54-39.png)
+![Complete Binary Heap](heap_binary_complete.png)
 
-![Next insertion point for Complete Binary Heap](2020-12-30-16-41-34.png)
+![Next insertion point for Complete Binary Heap](heap_insertion_point.png)
 
 ### 13.3.3 Representation
 
 We can represent a binary Tree using array.
 
-![Representation of Binary Tree](2020-12-30-16-43-11.png)
+![Representation of Binary Tree](heap_represent.png)
 
 Let *i* be the parent node index (zero based):
 
@@ -908,16 +908,16 @@ negated min_pq = [13, 11, 7, 5, 3, 2]
 insert(1)
 
 Add 1 at the bottom left position:
-![Add 1 at the bottom left](2020-12-30-16-55-31.png)
+![Add 1 at the bottom left](heap_insert_1.png)
 
 Bubble up 1:
-![Bubble up 1](2020-12-30-16-57-01.png)
+![Bubble up 1](heap_bubble_up_1.png)
 
 Bubble up 2:
-![Bubble up 2](2020-12-30-16-57-54.png)
+![Bubble up 2](heap_bubble_up_2.png)
 
 Bubble up 3:
-![Bubble up 3](2020-12-30-16-58-17.png)
+![Bubble up 3](heap_bubble_up_3.png)
 
 01:57:57
 
