@@ -861,9 +861,9 @@ Let *i* be the parent node index (zero based):
 - Anytime you need to dynamically fetch the 'next best' or 'next worst' element
 <!-- TODO: what is Huffman coding -->
 - Used in Huffman coding (often used in lossless data compression)
-<!-- TODO: what is Best First Search algo -->
+<!-- TODO: what is Best First Search algorithm -->
 - Best First Search (BFS) algorithms such as A* use PQs to continuously grab the next most promising node
-<!-- TODO: what is Minimum Spanning Tree algo -->
+<!-- TODO: what is Minimum Spanning Tree algorithm -->
 - Used by Minimum Spanning Tree algorithm
 
 ### 13.5  Complexity analysis
@@ -919,8 +919,81 @@ Bubble up 2:
 Bubble up 3:
 ![Bubble up 3](heap_bubble_up_3.png)
 
-01:57:57
+insert(13)
+
+Add 13 at the bottom left position:
+<!-- TODO add image -->
+
+Bubble up 1:
+<!-- TODO add image -->
 
 ## 16. Priority Queue Removing Elements
+
+- poll() - Removing from the root
+  - swap with last item in PQ
+  - remove last item
+  - bubble down:
+    - swap with the the smallest value
+    - swap with left value, if both are equal
+- Removing particular value from PQ -  remove(nr)
+  - iterate, to locate nr
+  - then the same steps as for poll
+
+<!-- TODO update images -->
+- poll()
+  - img1, swap
+  - img2, delete
+  - img3, bubble down 1
+  - img4, bubble down 2
+  - img5, bubble down 3
+
+<!-- TODO update images -->
+- remove(12):
+  - img1, iterate starting with first nt
+  - img2, swap
+  - img3, delete
+  - img4, bubble up!
+  - img5, bubble up!
+
+### 16.1 Removing elements O(n) -> O(log(n))
+
+The inefficiency of the removing alo comes from the fact that we have to perform a linear search to find out where an element is indexed at. What if instead we did a lookup using a **Hash-table** to find out where a node is indexed at?
+
+A Hash-table provides a constant time lookup and update for a mapping from a key (the node value) to a value (the index).
+
+#### 16.1.1 If several nodes have the same value?
+
+Instead of mapping one value to one position we will map one value to multiple positions. We can maintain a **set** of **tree set** in indexes for which a particular node value maps to.
+
+<!-- TODO image of has table with values -->
+
+Node Value (key) | Node index (value)
+--- | ---
+2 | (0, 2, 6)
+7 | (1, 4)
+11 | 3
+13 | 5
+
+to swap 7 with 13 you need to perform following actions in hash-table:
+
+identify indexes, for 7 and 13
+swap the indexes in the table
+check for  heap invariant (bubble up/down if needed)
+
+#### 16.1.2 If we want to remove a repeated node in our heap
+
+- If we want to remove a repeated node in our heap, which node do we remove and foes it matter which one we pick?
+- it does not matter which node we remove as long as we satisfy the heap invariant in the end.
+
+#### 16.1.3 Example with hash-table
+
+- insert(3)
+- remove(2)
+- poll
+
+- insert(3)
+  - place a at the bottom of heap and in hash table 3:7
+  - bubble up v1, swap 3:7 and 11:3
+  - bubble up v2, swap 3:3 and 7: 1
 
 ## 17. Priority Queue Code
