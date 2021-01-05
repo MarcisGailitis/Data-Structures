@@ -908,24 +908,24 @@ negated min_pq = [13, 11, 7, 5, 3, 2]
 insert(1)
 
 Add 1 at the bottom left position:
-![Add 1 at the bottom left](heap_insert_1.png)
+![Add 1 at the bottom left](heap_insert_1_1.png)
 
 Bubble up 1:
-![Bubble up 1](heap_bubble_up_1.png)
+![Bubble up 1](heap_insert_1_2.png)
 
 Bubble up 2:
-![Bubble up 2](heap_bubble_up_2.png)
+![Bubble up 2](heap_insert_1_3.png)
 
 Bubble up 3:
-![Bubble up 3](heap_bubble_up_3.png)
+![Bubble up 3](heap_insert_1_4.png)
 
 insert(13)
 
 Add 13 at the bottom left position:
-<!-- TODO add image -->
+![Insert 13](heap_insert_13_1.png)
 
 Bubble up 1:
-<!-- TODO add image -->
+![bubble up](heap_insert_13_2.png)
 
 ## 16. Priority Queue Removing Elements
 
@@ -939,25 +939,49 @@ Bubble up 1:
   - iterate, to locate nr
   - then the same steps as for poll
 
-<!-- TODO update images -->
-- poll()
-  - img1, swap
-  - img2, delete
-  - img3, bubble down 1
-  - img4, bubble down 2
-  - img5, bubble down 3
+### 16.1 poll()
 
-<!-- TODO update images -->
-- remove(12):
-  - img1, iterate starting with first nt
-  - img2, swap
-  - img3, delete
-  - img4, bubble up!
-  - img5, bubble up!
+Select 1st element
+![poll()](heap_poll_1.png)
 
-### 16.1 Removing elements O(n) -> O(log(n))
+Swap
+![Swap](heap_poll_2.png)
 
-The inefficiency of the removing alo comes from the fact that we have to perform a linear search to find out where an element is indexed at. What if instead we did a lookup using a **Hash-table** to find out where a node is indexed at?
+Delete
+![Delete](heap_poll_3.png)
+
+Bubble Down
+![Bubble Down](heap_poll_4.png)
+
+Bubble Down
+![Bubble Down](heap_poll_5.png)
+
+Bubble Down
+![Bubble Down](heap_poll_6.png)
+
+### 16.2 remove(12)
+
+Iterate through heap starting with first element
+![remove(12)](heap_remove_12_1.png)
+
+Select the found item and last item
+![Select items](heap_remove_12_2.png)
+
+Swap
+![Swap](heap_remove_12_3.png)
+
+Delete
+![Delete](heap_remove_12_4.png)
+
+Bubble up
+![Bubble up](heap_remove_12_5.png)
+
+Bubble up
+![Bubble up](heap_remove_12_6.png)
+
+### 16.1 Removing elements more efficiently O(n) -> O(log(n))
+
+The inefficiency of the removing alo comes from the fact that we have to perform a linear search to find out where an element is indexed at. What if instead we did a lookup using a **hash-table** to find out where a node is indexed at?
 
 A Hash-table provides a constant time lookup and update for a mapping from a key (the node value) to a value (the index).
 
@@ -965,7 +989,7 @@ A Hash-table provides a constant time lookup and update for a mapping from a key
 
 Instead of mapping one value to one position we will map one value to multiple positions. We can maintain a **set** of **tree set** in indexes for which a particular node value maps to.
 
-<!-- TODO image of has table with values -->
+![Heap and Hash Table](heap_hash_table.png)
 
 Node Value (key) | Node index (value)
 --- | ---
@@ -974,26 +998,47 @@ Node Value (key) | Node index (value)
 11 | 3
 13 | 5
 
-to swap 7 with 13 you need to perform following actions in hash-table:
+In order to swap 7 with 13 you need to perform following actions in hash-table:
 
-identify indexes, for 7 and 13
-swap the indexes in the table
-check for  heap invariant (bubble up/down if needed)
+1. Identify indexes, for 7 and 13
+![Identify](heap_hash_1.png)
+
+2. Swap the indexes in the table
+![Swap](heap_hash_2.png)
+
+3. Check for  heap invariance (bubble up/down if needed)
 
 #### 16.1.2 If we want to remove a repeated node in our heap
 
-- If we want to remove a repeated node in our heap, which node do we remove and foes it matter which one we pick?
-- it does not matter which node we remove as long as we satisfy the heap invariant in the end.
+If we want to remove a repeated node in our heap, which node do we remove and foes it matter which one we pick?
 
-#### 16.1.3 Example with hash-table
+It does not matter which node we remove as long as we satisfy the heap invariant in the end.
 
-- insert(3)
-- remove(2)
-- poll
+#### 16.1.3 Example with hash-table, insert(3)
 
-- insert(3)
-  - place a at the bottom of heap and in hash table 3:7
-  - bubble up v1, swap 3:7 and 11:3
-  - bubble up v2, swap 3:3 and 7: 1
+place new node at the bottom left of heap and in hash table with key:value 3:7
+![insert 3](heap_hash_insert_3_1.png)
+
+Bubble up, swap values for 3:7 and 11:3
+![Bubble up](heap_hash_insert_3_2.png)
+
+bubble up v2, swap values for 3:3 and 7:1
+![Bubble up](heap_hash_insert_3_3.png)  
+
+#### 16.1.4 Example with hash-table, poll()
+
+Find first index of two, for learning purpose, otherwise remove last
+
+Identify first and last
+![Identify](heap_hash_pull_1.png)
+
+Swap
+![Swap](heap_hash_pull_2.png)
+
+Delete
+![Delete](heap_hash_pull_3.png)
+
+Bubble down
+![Bubble down](heap_hash_pull_4.png)
 
 ## 17. Priority Queue Code
