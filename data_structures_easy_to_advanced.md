@@ -1045,7 +1045,7 @@ Bubble down
 
 A min PQ implementation using binary heap.
 
-three private attributes:
+Attributes:
 
 - nr of elements in heap,
 - internal capacity inside heap,
@@ -1066,34 +1066,61 @@ Methods:
 
 - PQueue() - constructs a priority queue size 1
 - PQueue(size) constructs a priority queue with size n
-
-```java
-  public PQueue() {
-    this(1);
-  }
-
-  public PQueue(int sz) {
-    heap = new ArrayList<sz>;
-  }
-
-```
-
-Methods:
-
-- PQueue(elements) - constructs a priority queue from elements using O(n * log(n)) complexity
-
-```java
-  public PQueue (collection <T> elements) {
-    this(elements.size());
-    for(T elem : elements) add(elem);
-  }
-```
-
-Methods:
-
+- PQueue(elems) - constructs a priority queue from elements using O(n * log(n)) complexity
 - isEmpty() - returns True if empty
 - clear() - cleans teh PQ, cleans dynamic list, cleans hash table and resets attributes
 - size() - return the size of PQ
+- peek() - check the element with lowest priority
+- poll() - removes the element with lowest priority
+  - uses private removeAt method
+- contains(value) - returns True, if element in PQ
+  - uses private containsKey method
+- add(value) - adds element to the PQ
+  - uses private mapAdd() method
+  - uses private swim() method
+- private less(inx1, inx2) - checks if value of node i is less than value of node j
+- private swap(inx1, inx2) - swaps two nodes
+  - uses private mapSwap() method
+- private swim(inx1) - bubble up node
+  - uses private less() method
+  - uses private swap() method
+- private sink(inx1) - bubble down node
+  - uses private less() method
+  - uses private swap() method
+- remove(elem) - Removes a particular element
+  - uses private mapGet() method
+  - uses private removeAt() method
+- private removeAt(k) - Removes a node at particular index
+  - uses private swap() method
+  - uses private mapRemove() method
+  - uses private sink() method
+  - uses private swim() method
+- private mapAdd(value, inx) - Add a node value and its index to the map
+- private mapRemove(value, inx) - Removes the index at a given value
+- private mapGet(value) - extract an index position for the given value, last position by default
+- private mapSwap(val1,va2,inx1,inx2) - exchange the index of two nodes internally within the map
+
+```java
+  // PQueue() 
+  public PQueue() {
+    this(1);
+  }
+```
+
+```java
+  // PQueue(size)
+  public PQueue(int sz) {
+    heap = new ArrayList<sz>;
+  }
+```
+
+```java
+  // PQueue(elems)
+  public PQueue (collection <T> elems) {
+    this(elems.size());
+    for(T elem : elems) add(elem);
+  }
+```
 
 ```java
   public void clear() {
@@ -1102,31 +1129,27 @@ Methods:
     heapSize = 0;
     map.clear();
   }
-
 ```
-
-Methods:
-
-- peek() - check the element with lowest prio
-- poll() - removes the element with lowest prio, uses removeAt private method
-- contains(elem) - returns True, if element in PQ
 
 ```java
   public T peek() {
     if (isEmpty()) return null;
     return heap.get(0);
   }
+```
 
+```java
   public T poll() {
     return removeAt(0);
   }
+```
 
+```java
   public boolean contains(T elem) {
 
-    // Map lookup, O(1), using hash-table built in containsKey method
+    // Map lookup, O(1)
     if (elem == null) returns false
     return map.containsKey(elem)
-
 
     // linear scan using array O(n)
     for (int i = 0; i < heapSize, i ++)
@@ -1135,10 +1158,6 @@ Methods:
     return false
   }
 ```
-
-Methods:
-
-- add(elem) - adds element to the PQ, using mapAdd method
 
 ```java
   public void add (T elem) {
@@ -1160,13 +1179,6 @@ Methods:
     heapSize++
   }
 ```
-
-Methods:
-
-- private less(i, j) - helper function, checks if element in node i is less than element in node j
-- private swap(i, j) - helper, swaps two nodes
-- private swim(k) - bubble up node
-- private sink(k) - bubble down node
 
 ```java
   private void swim(int k) {
