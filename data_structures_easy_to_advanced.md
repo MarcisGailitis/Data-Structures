@@ -817,13 +817,13 @@ A heap is a tree based data structure that satisfies the heap invariant (also ca
 
 ![heap](./heap.png)
 
-### 13.3.1 A Priority queue
+#### 13.3.1 A Priority queue
 
 Priority queues are usually implemented with heaps since this gives them the best possible time complexity.
 
 The Priority Queue (PQ) is an Abstract Data Type (ADT), hence heaps are not the only way to implement PQs. As an example, we could use an unsorted list, but his would give us the best possible time complexity.
 
-### 13.3.2 Binary Heap
+#### 13.3.2 Binary Heap
 
 There are many types of heaps we could use to implement a priority queue, including:
 
@@ -843,7 +843,7 @@ A Complete binary tree is a tree in which at every level, except possibly the la
 
 ![Next insertion point for Complete Binary Heap](heap_insertion_point.png)
 
-### 13.3.3 Representation
+#### 13.3.3 Representation
 
 We can represent a binary Tree using array.
 
@@ -1042,3 +1042,177 @@ Bubble down
 ![Bubble down](heap_hash_pull_4.png)
 
 ## 17. Priority Queue Code
+
+A min PQ implementation using binary heap.
+
+three private attributes:
+
+- nr of elements in heap,
+- internal capacity inside heap,
+- dynamic list to track elements inside heap.
+- hash table for faster lookup for remove and contains methods
+
+```java
+import java.util.*;
+
+class PQueue <T extends Comparable <T>> {
+  private int heapSize = 0;
+  private int heapCapacity = 0;
+  private List <T> heap = null;
+  private Map <T, TreeSet<Integer>> map = new HashMap<>();
+```
+
+Methods:
+
+- PQueue() - constructs a priority queue size 1
+- PQueue(size) constructs a priority queue with size n
+
+```java
+  public PQueue() {
+    this(1);
+  }
+
+  public PQueue(int sz) {
+    heap = new ArrayList<sz>;
+  }
+
+```
+
+Methods:
+
+- PQueue(elements) - constructs a priority queue from elements using O(n * log(n)) complexity
+
+```java
+  public PQueue (collection <T> elements) {
+    this(elements.size());
+    for(T elem : elements) add(elem);
+  }
+```
+
+Methods:
+
+- isEmpty() - returns True if empty
+- clear() - cleans teh PQ, cleans dynamic list, cleans hash table and resets attributes
+- size() - return the size of PQ
+
+```java
+  public void clear() {
+    for (int i=0; i < heapCapacity; i++)
+      heap.set(i, null);
+    heapSize = 0;
+    map.clear();
+  }
+
+```
+
+Methods:
+
+- peek() - check the element with lowest prio
+- poll() - removes the element with lowest prio, uses removeAt private method
+- contains(elem) - returns True, if element in PQ
+
+```java
+  public T peek() {
+    if (isEmpty()) return null;
+    return heap.get(0);
+  }
+
+  public T poll() {
+    return removeAt(0);
+  }
+
+  public boolean contains(T elem) {
+
+    // Map lookup, O(1), using hash-table built in containsKey method
+    if (elem == null) returns false
+    return map.containsKey(elem)
+
+
+    // linear scan using array O(n)
+    for (int i = 0; i < heapSize, i ++)
+    if (heap.get(i).equals(elem))
+      return true
+    return false
+  }
+```
+
+Methods:
+
+- add(elem) - adds element to the PQ, using mapAdd method
+
+```java
+  public void add (T elem) {
+
+    // why?
+    if (elem == null) throw new IllegalArgumentException();
+
+    if heapSize < heapCapacity {
+      heap.set(heapSize, elem);
+    } else {
+      heap.add(elem);
+      heapCapacity++;
+    }
+
+    mapAdd(elem, heapSize);
+
+    // method to bubble up in heap newly added element
+    swim.heapSize()
+    heapSize++
+  }
+```
+
+Methods:
+
+- private less(i, j) - helper function, checks if element in node i is less than element in node j
+- private swap(i, j) - helper, swaps two nodes
+- private swim(k) - bubble up node
+- private sink(k) - bubble down node
+
+```java
+  private void swim(int k) {
+
+    // grab the index of the parent node
+    int parent = (k-1) / 2;
+
+    // keep swimming while:
+    // 1. we have not reached the root
+    // 2. we are less than our parent
+
+    while (k > 0 and less(k, parent)) {
+
+      // swap k with the parent, bubble up
+      swap(parent, k);
+      k = parent;
+
+      // grab the index of the next parent node
+      parent = (k-1) / 2;
+    }
+  }
+```
+
+```java
+  private void sink(int k) {
+    
+    while (true) {
+      // defines child nodes
+      int left = 2 * k + 1
+      int right = 2 * k + 2
+      // assumes that left child node is smallest
+      int smallest = lest
+
+      // verifies assumption, and changes it if right is the smallest
+      if (right < heapSize && less(right, left) )
+        smallest = right;
+
+      // stop if outsize bounds of the tree
+      if ( left >= heapSize ) break;
+
+      // stop if we cannot sink k anymore
+      if less(k, smallest) break;
+
+      // move down the tree following the smallest node
+      swap(smallest, k);
+      k = smallest;
+    }
+  }
+```
