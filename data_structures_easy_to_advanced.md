@@ -11,10 +11,10 @@
 3. Stack
 4. Queue
 5. Priority Queue
-Union find
-Binary Search
-Hash Table
-Fenwick Tree
+6. Union find
+7. Binary Search
+8. Hash Table
+9. Fenwick Tree
 
 ## Table of contents
 
@@ -1226,5 +1226,105 @@ Methods:
       swap(smallest, k);
       k = smallest;
     }
+  }
+```
+
+```java
+  private boolean less(int i, int j) {
+    
+    T node1 = heap.get(i);
+    T node2 = heap.get(j);
+
+    return node1.compareTo(node2) <=0;
+  }
+```
+
+```java
+  private void swap(int i, int j) {
+  
+    // sswap items in array
+    T i_elem = heap.get(i);
+    T j_elem = heap.get(j);
+
+    heap.set(i, j_elem);
+    heap.set(j, i_elem);
+
+    // sswap items in hash-table
+    mapSwap(i_elem, j_elem, i, j);
+  }
+```
+
+```java
+  public boolean remote(T element) {
+    if (element == null) return false;
+
+    // linear removal via search, O(n)
+    for (int i = 0; i < heapSize; i++) {
+      if (element.equals(heap.get(i))) {
+        removeAt(i);
+        return true
+      }
+    }
+
+    // log removal with hash-table O(log(n))
+    Integer index = mapGet(element);
+    if (index != null) removeAt(index);
+    return index != null;
+  }
+```
+
+```java
+  private T removeAt(int i) {
+    if(isEmpty()) return null;
+
+    // reduce heap size by one
+    heapSize--;
+    // extract the value of node
+    T removed_data = heap.get(i);
+    // replace the removed element with last element in heap
+    swap(i,heapSize);
+
+    // Obliterate the value from array and hashTable
+    heap.set(HeapSize, null);
+    mapRemove(removed_data, heapSize);
+
+    // Removed last element
+    if (i==heapSize) return removed_data;
+    T elem = heap.get(i);
+
+    // try sinking element
+    sink(i);
+
+    // if sinking did not work try swimming
+    if (heap.get(i).equals(elem) )
+      swim(i);
+
+    return removed_data;
+
+  }
+```
+
+```java
+  // recursively checks if this heap is a min heap
+  // this method is just for testing purposes to make
+  // sure the heap invariant is being maintained
+  // call this method with k=0 ti start at the root 
+  public boolean isMinHeap(int k) {
+
+    // if outside the bounds of the heap, return true
+    if (k >= heapSize) return true;
+
+    int left  = 2 * k + 1
+    int right = 2 * k + 2
+
+    // make sure that the current node k is less than
+    // both its children left and right if they exist
+    // return false otherwise to indicate an invalid heap
+    if (left < heapSize && !less(k, left)) return false; 
+    if (right < heapSize && !less(k, right)) return false;
+    
+    // recurse on both children to make sure they are also valid heaps
+    return isMinHeap(left) && isMinHeap(right);
+  
   }
 ```
