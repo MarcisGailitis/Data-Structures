@@ -1242,14 +1242,14 @@ Methods:
 ```java
   private void swap(int i, int j) {
   
-    // sswap items in array
+    // swap items in array
     T i_elem = heap.get(i);
     T j_elem = heap.get(j);
 
     heap.set(i, j_elem);
     heap.set(j, i_elem);
 
-    // sswap items in hash-table
+    // swap items in hash-table
     mapSwap(i_elem, j_elem, i, j);
   }
 ```
@@ -1328,3 +1328,283 @@ Methods:
   
   }
 ```
+
+## 28. Hash table (HT), hash function
+
+### 28.1 Hash Table (HT)
+
+A **hash table (HT)** is a data structure that provides a mapping from keys to values using  technique called **hashing**.
+
+Key (value) | Value (fav color)
+--- | ---
+'William' | 'green'
+'Thomas' | 'red'
+
+We refer to these as key-value pairs.
+Keys must be unique, but values can be repeated.
+
+HTs are often used to track item frequencies, for example counting nr of times a word appears in a given text.
+
+The key-value pairs you can place in a HT can be  any type not just strings and nrs, but also objects! However, hte keys needs to be **hashable**.
+
+Key (int) | Value (list)
+--- | ---
+2344 | [0, 1, 2]
+456 | []
+
+### 28.2 Hash Function, H(x)
+
+A hash function H(x) is a function that maps a key 'x' to a whole number in a fixed range.
+
+For example `H(x) = (x**2 - 6x + 9) % 10` maps all integer keys to the range [0, 9]
+
+- H(4) = (16 - 24 + 9) % 10 = 1
+- H(-7) = (49 + 42 + 9) % 10 = 0
+- H(0) = (0 - 0 + 9) % 10 = 9
+- H(2) = (4 - 12 + 9) % 10 = 1
+- H(8) = (64 - 48 + 9) % 10 = 5
+
+We can also define hash function for arbitrary objects such as strings, lists, tuples, multi data objects, etc ...
+
+For a string s let H(s) be a hash function defined below where ASCII(x) returns the ASCII value of the character x
+
+```py
+def H(s):
+  sum = 0
+  for char in s:
+    sum += ASCII(x)
+  return sum % 50
+```
+
+- H('BB') = (66 + 66) % 50 = 32
+- H('B') = (0) % 50 = 0
+- H('ABC') = (65+66+67) % 50 = 48
+- H('Z') = (90) % 50 = 40
+
+Suppose we have a DB of ppl  objects with 3 fields: name, age and sex.
+Can you define a hash function that maps a person to the set [0 - 5]?
+
+Name | Age | Sex | Hash
+--- | --- | --- | ---
+William | 21 | M | ?
+Kate | 19 | F | ?
+Bob | 33 | M | ?
+Rose | 26 | F | ?
+
+```py
+def H(person):
+  sum = person.age
+  if sex == 'M': sum += 1
+  sum+=(len(name))
+  return sum % 6
+```
+
+Name | Age | Sex | Hash
+--- | --- | --- | ---
+William | 21 | M | 5
+Kate | 19 | F | 5
+Bob | 33 | M | 1
+Rose | 26 | F | 0v
+
+### 28.3 Properties of H(x)
+
+1. If H(x) == H(y) then objects x and y might be equal, but if H(x) != H(y) ten x and y are certainly not equal. This means that instead of comparing x an y directly a smarter approach is to first compare their hash values, ond only if the hash values match do we need to explicitly compare x and y.
+
+2. A hash function H(x) must be deterministic. This means that if H(x) = y then H(x) must always produce y and never another value.
+
+3. We try very hard to make uniform hash functions to minimize the number of hash collisions. A hash collision is when two objects x, y hash to the same value i.e H(x) == H(y).
+
+Since we are going to use hash functions in the implementation of our hash table we need our hash functions to be deterministic. To enforce this behaviour, we demand that the keys used in our hash table are immutable data types. Hence, if a key of type T is immutable, and we have a hash function H(k) defined for all keys k of type T then we say a key of type T is hashable.
+
+### 28.4 How does a hash table work?
+
+Ideally we would like to have a very fast insertion, lookup and removal time for the data we are placing within our hash table.
+
+Remarkably, we can achieve all this in O(1) time using a hash function as a way to index into hash table. The constant time behaviour attributed to hash tables is only true if you have a good uniform hash function.
+
+Think of a hash table as an indexable block of memory (list) and we can only access uts entries using the value given to us by our hash function H(x).
+
+### 28.5 HT insert?
+
+inx | Key | Value
+--- | --- | ---
+0 | |
+1 | |
+2 | |
+3 | |
+4 | |
+5 | |
+6 | |
+7 | |
+8 | |
+9 | |
+
+H(x) = (x**2 + 3) % 10
+
+To insert (3, 'byte eater'), we hash the key and find out where it goes in the table.
+
+H(3) = (3**2 + 3) % 10 = 2
+
+inx | Key | Value
+--- | --- | ---
+0 | |
+1 | |
+2 | 3 | 'byte eater'
+3 | |
+4 | |
+5 | |
+6 | |
+7 | |
+8 | |
+9 | |
+
+To insert (1, 'mg'), we hash the key and find out where it goes in the table.
+
+H(1) = (1**2 + 3) % 10 = 4
+
+inx | Key | Value
+--- | --- | ---
+0 | |
+1 | |
+2 | 3 | 'byte eater'
+3 | |
+4 | 1 | 'mg'
+5 | |
+6 | |
+7 | |
+8 | |
+9 | |
+
+To insert (32, 'Lauren425'), we hash the key and find out where it goes in the table.
+
+H(32) = (32**2 + 3) % 10 = 7
+
+inx | Key | Value
+--- | --- | ---
+0 | |
+1 | |
+2 | 3 | 'byte eater'
+3 | |
+4 | 1 | 'mg'
+5 | |
+6 | |
+7 | 32 | 'Lauren425'
+8 | |
+9 | |
+
+To insert (5, 'ternary-wizard'), we hash the key and find out where it goes in the table.
+
+H(5) = (5**2 + 3) % 10 = 8
+
+inx | Key | Value
+--- | --- | ---
+0 | |
+1 | |
+2 | 3 | 'byte eater'
+3 | |
+4 | 1 | 'mg'
+5 | |
+6 | |
+7 | 32 | 'Lauren425'
+8 | 8 | ternary-wizard
+9 | |
+
+To insert (10, 'orange-knight'), we hash the key and find out where it goes in the table.
+
+H(5) = (10**2 + 3) % 10 = 3
+
+inx | Key | Value
+--- | --- | ---
+0 | |
+1 | |
+2 | 3 | 'byte eater'
+3 | 10 | orange-knight
+4 | 1 | 'mg'
+5 | |
+6 | |
+7 | 32 | 'Lauren425'
+8 | 8 | ternary-wizard
+9 | |
+
+### 28.6 HT lookup?
+
+To lookup which user has rank 'r' we simply simply compute H(r) and look inside a hashtable.
+
+### 28.7 HT Hash Collisions
+
+- What to do if there is a hash collision?
+- For example users with ranks 2 and 8 hash has the same value!!
+  - H(2) = (2**2 + 3) % 10 = 7
+  - H(8) = (2**2 + 3) % 10 = 7
+- We use one of many hash collision resolution techniques to handle this, the two most popular ones are **separate chaining** and **open addressing**.
+  - Separate chaining deals with hash collisions my maintaining a data structure (usually a linked list) to hold all the different values which hashed to a particular value.
+  - Open addressing deals with hash collisions by finding another place within the hash table for the object to go by offsetting it from the position to which it is offset to.
+  
+### 28.7 HT complexity
+
+Operation | Average | Worst
+--- | --- | ---
+Insertion | O(1) | O(n)
+Removal | O(1) | O(n)
+Search | O(1) | O(n)
+
+The constant time behaviour attributed to hash tables is only true if you have a good uniform hash function.
+
+## 29. Hash table separate chaining
+
+Separate chaining is one of many strategies to deal with hash collisions my maintaining a data structure (usually a linked list) to hold all the different values which hashed to a particular value.
+The data structure used to cache the items which hashed to a particular value is not limited to a linked list. Might also contain: arrays, binary trees, self balancing trees and etc
+
+Suppose we have a hash table that will store (name, age) key-value pairs and we with to insert the following entries:
+
+Name | Age | Hash
+--- | --- | ---
+Will | 21 | 3
+Leah | 18 | 4
+Rick | 61 | 2
+Ria | 25 | 1
+Lara | 34 | 4
+Ryan | 56 | 1
+Finn | 21 | 3
+Mark | 10 | 4
+
+Hash Table | Linked List
+--- | ---
+0 |
+1 | (name: Ria, age: 21) -> (name: Ryan, age: 56)
+2 | (name: Rick, age: 61)
+3 | (name: Will, age: 21) -> (name: Lara, age: 34) -> (name: Finn, age: 21)
+4 | (name: Leah, age: 18) -> (name: Mark, age: 10)
+5 |
+
+To find the age of 'Ryan':
+
+1. hash the key "Ryan" to  obtain the value (index) 1.
+2. After this search the bucket 1 for name "Ryan"
+3. After this retrieve the Age.
+
+It might happen that the value you are looking for does not exist in the bucket the key hashed to in which case the item does not exist in the HT.
+
+### 29.1 Hash table FAQ
+
+- How do I maintain O(1) insertion and lookup time complexity once my HT gets really full and I have long linked list chains?
+- Once the HT contains a lot of elements you should create a new HT with a larger capacity and rehash all the items inside the old HT and disperse them throughout the new HT at different locations.
+
+- how do I remove key-value pai from my HT?
+- Apply the same procedure as doing a lookup for a key, but this time instead of returning the value associated with the key, remove the node in the linked list data structure
+
+## 30. Hash table separate chaining source code
+
+To be updated
+
+## 31. Hash table open addressing
+
+## 32. Hash table linear probing
+
+## 33. Hash table quadratic probing
+
+## 34. Hash table double hashing
+
+## 35. Hash table open addressing removing
+
+## 36. Hash table open addressing code
