@@ -1597,7 +1597,34 @@ It might happen that the value you are looking for does not exist in the bucket 
 
 To be updated
 
-## 31. Hash table open addressing
+## 31. Hash table (HT), open addressing
+
+- The goal of the Hash Table (HT) is to construct a mapping from keys to values.
+- Keys must be hashable and we need a hash function that converts keys to whole nrs
+- We use the hash function defined on our key set to index into an array (the hash table)
+- Hash functions ar not perfect, therefore sometimes two keys k1 and k2 (k1 != k2) hash to the same value. When this happens we have a hash collision (H(k1) == H(k2)).
+- Open addressing is a way to solve this issue.
+
+When using open addressing as a collision resolution technique the key-value pairs are stored in the table (array) itself, as opposed to a data structure like in separate chaining.
+
+This means that we need to care a great deal about the size of our hash table and how many elements are currently in the table.
+
+Load factor = items in the table / size of table.
+
+![Separate chaining vs. open addressing](16_10_46.png)
+
+The O(1) constant time behaviour attributed to hash tables assumes the load factor is kept below a certain fixed value. This means once the load factor > threshold we need to grow the table size (ideally exponentially, by doubling).
+
+When we want to insert a key-value pair (k, v) into the hash table we hash the key and obtain an original position for where this key-value belongs i.e H(k).
+
+If the position for key hashed to is occupied we try another position in the hash table by offsetting the current position subject to a probing sequence P(x) (LV: zondēšanas secība). We keep doing this until an unoccupied slot is found. There are infinite amount of probing sequences you can come up with, there are a few:
+
+- linear probing: P(x) = ax + b, where a and b are constants
+- Quadratic probing: P(x) = ax**2 + bx + c, where a, b and c are constants
+- Double Hashing: P(k, x) = x * H2(k), where H2(k) is a secondary hash function
+- Pseudo random number generator: P(k, x) = x * RNG(H(k),x), where RNG is a random number generator function seeded with H(x)
+
+
 
 ## 32. Hash table linear probing
 
